@@ -11,7 +11,6 @@ from flask import jsonify
 
 from color.trained import get_color
 
-
 app = Flask(__name__, static_url_path='/static')
 app.config.from_pyfile(os.path.join(settings.DIR, 'config/settings.py'))
 db = SQLAlchemy(app)
@@ -52,76 +51,38 @@ def color():
                     "value": color_string})
 
 
-@app.route("/show", methods=['GET'])
-def show_hex():
-    with open(color_computed_file, "r") as f:
-        results = json.load(f)
-        return render_template("cases.html", results=results)
-
-
-@app.route("/hsv", methods=["GET"])
-def show_hsv():
-    import colorsys
-    with open(color_computed_file, "r") as f:
-        color_results = json.load(f)
-
-    # hsv sort
-    for c in color_results:
-        c["color_rgb"] = list(map(lambda x: float(x), c["color_rgb"]))
-        c["color_lab"] = list(map(lambda x: float(x), c["color_lab"]))
-    color_results.sort(key=lambda item: colorsys.rgb_to_hsv(*item["color_rgb"]))
-    return render_template("cases.html", results=color_results)
-
-
-@app.route("/hsl", methods=["GET"])
-def show_hsl():
-    import colorsys
-    with open(color_computed_file, "r") as f:
-        color_results = json.load(f)
-
-    # hsv sort
-    for c in color_results:
-        c["color_rgb"] = list(map(lambda x: float(x), c["color_rgb"]))
-        c["color_lab"] = list(map(lambda x: float(x), c["color_lab"]))
-    color_results.sort(key=lambda item: colorsys.rgb_to_hls(*item["color_rgb"]))
-    return render_template("cases.html", results=color_results)
+@app.route("/date", methods=["GET"])
+def show_date():
+    page = request.args.get("page", None)
+    if page:
+        colors_to_send = request_incremental(order="id", page=page)
+        return jsonify(colors_to_send)
+    else:
+        # db.create_scoped_session()
+        colors = Color.query.order_by("id").limit(5000).all()
+        return render_template("cases.html", results=colors)
 
 
 @app.route("/lum", methods=["GET"])
 def show_lum():
-    import math
-    with open(color_computed_file, "r") as f:
-        color_results = json.load(f)
-
-    # hsv sort
-    for c in color_results:
-        c["color_rgb"] = list(map(lambda x: float(x), c["color_rgb"]))
-        c["color_lab"] = list(map(lambda x: float(x), c["color_lab"]))
-
-    def lum(r, g, b):
-        return math.sqrt(.241 * r + .691 * g + .068 * b)
-
-    color_results.sort(key=lambda item: lum(*item["color_rgb"]))
-    return render_template("cases.html", results=color_results)
-
-
-@app.route("/date", methods=["GET"])
-def show_date():
-    starting_num = 5000
-    increment = 1000
     page = request.args.get("page", None)
     if page:
-        from_data = starting_num + (int(page)*increment)
-        to_data = from_data+increment
-        print("from data:", from_data, "to data:", to_data)
-        colors = Color.query.order_by("id").all()[from_data:to_data]
-        # if len(colors):
-        colors_to_send = [color.as_dict() for color in colors]
+        colors_to_send = request_incremental(order="lum", page=page)
         return jsonify(colors_to_send)
     else:
         # db.create_scoped_session()
-        colors = Color.query.order_by("id").limit(starting_num).all()
-        return render_template("cases.html", results=colors)
+        colors = Color.query.order_by("lum").all()
+
+        return render_template("cases.html", results=colors[0:5000])
+
+
+def request_incremental(order="lum", page=0):
+    starting_num = 5000
+    increment = 1000
+    from_data = starting_num + (int(page) * increment)
+    to_data = from_data + increment
+    colors = Color.query.order_by(order).all()[from_data:to_data]
+    return [color.as_dict() for color in colors]
 
 
 class Color(db.Model):
@@ -145,7 +106,7 @@ class Color(db.Model):
         return '<id %r>' % self.id
 
     def as_dict(self):
-       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
 if __name__ == '__main__':

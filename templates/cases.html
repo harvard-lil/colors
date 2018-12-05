@@ -2,11 +2,20 @@
 {% block content %}
 
   {% for case in results %}
-    <div class="case-pixel"
+    <div class="case-pixel tooltip"
          data-date="{{ case.date }}"
          data-context="{{ case.context }}"
          style="background-color: #{{ case.hex }}">
+    <span class="tooltiptext">
+      <h2>{{ case.captured_text }}</h2>
+      <em>"{{ case.context }} "</em>
+      <br/>
+      {{ case.date }}
+      <br/>
+      {{ case.name_abbreviation }}
+     </span>
     </div>
+
   {% endfor %}
 
 {% endblock %}

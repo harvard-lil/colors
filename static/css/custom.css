@@ -2,6 +2,35 @@
     position: relative;
     bottom: -15px;
     float: left;
-    height: 20px;
-    width: 20px;
+    height: 40px;
+    width: 40px;
+}
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.tooltiptext {
+    font-size: 20px;
+    visibility: hidden;
+    text-align: center;
+    width: 200px;
+    background-color: white;
+    position: absolute;
+    top: 10px;
+    left: 105%;
+    /*border: 1px solid darkgrey;*/
+    padding: 5px;
+    z-index: 1;
+}
+
+.tooltip .tooltiptext em {
+    font-weight: normal;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
 }

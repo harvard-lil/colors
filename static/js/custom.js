@@ -1,18 +1,25 @@
 let page = 0;
-
+let requestPath = window.location.pathname;
 
 function createCasePixel(case_obj) {
   return "<div class='case-pixel'" +
       "data-date='" + case_obj.date + "' " +
       "data-context='" + case_obj.context + "' " +
-      "style='background-color: #" + case_obj.hex + "'></div>"
+      "style='background-color: #" + case_obj.hex +
+      "'>" +
+      "<span class='tooltiptext'><h2>"  +
+      case_obj.captured_text + "</h2>" +
+      "<em>" + case_obj.context + "</em>" +
+      "<br/>" +
+      case_obj.date +
+      "<br/>" + case_obj.name_abbreviation + "</span></div>"
 }
 
 function requestNew() {
   let container = $(".container");
   if ($(window).scrollTop() >= ($(window).height() / 2)) {
     $.ajax({
-      url: "/date?page=" + page,
+      url: requestPath + "?page=" + page,
       success: function (data) {
         if (data.length === 0) {
           // done with loading data, return empty;
@@ -51,31 +58,8 @@ function throttle(callback, limit) {
 
 
 $(function () {
-  // let lastScrollTop = 0;
-  // let breakpoint = $(window).height() / 2;
-  // let original_breakpoint = breakpoint;
-  //
   window.addEventListener("scroll", throttle(requestNew, 500));
-  // $(window).scroll();
-  // $(window).scroll(function () {
-  //
-  //   let scrolltop = $(this).scrollTop();
-  //   if (scrolltop > lastScrollTop) {
-  //     // downscroll code
-  //     if (scrolltop >= breakpoint) {
-  //       // breakpoint += original_breakpoint;
-  //
-  //       throttle(requestNew(page), 500);
-  //     }
-  //   } else {
-  //     // upscroll code
-  //   }
-  //   lastScrollTop = scrolltop;
-  //
-  // });
   $('.case-pixel').hover(function (e) {
-    // console.log($(this).data('date'));
-
   });
 });
 
