@@ -1,0 +1,7 @@
+.case-pixel {
+    position: relative;
+    bottom: -15px;
+    float: left;
+    height: 20px;
+    width: 20px;
+}

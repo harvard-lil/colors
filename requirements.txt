@@ -15,7 +15,9 @@ colormath==3.0.0
 cycler==0.10.0            # via matplotlib
 dask[array]==1.0.0        # via scikit-image
 decorator==4.3.0          # via ipython, networkx, traitlets
+flask-sqlalchemy==2.3.2
 flask==1.0.2
+gunicorn==19.9.0
 idna==2.7                 # via requests
 ipython-genutils==0.2.0   # via traitlets
 ipython==7.1.1
@@ -33,6 +35,7 @@ pickleshare==0.7.5        # via ipython
 pillow==5.3.0             # via scikit-image
 pip-tools==3.1.0
 prompt-toolkit==2.0.7     # via ipython
+psycopg2==2.7.6.1
 ptyprocess==0.6.0         # via pexpect
 pygments==2.3.0           # via ipython
 pyparsing==2.3.0          # via matplotlib
@@ -43,6 +46,7 @@ requests==2.20.1          # via python-colourlovers
 scikit-image==0.14.1
 scipy==1.1.0              # via scikit-image
 six==1.11.0               # via cycler, pip-tools, prompt-toolkit, python-dateutil, scikit-image, traitlets
+sqlalchemy==1.2.14        # via flask-sqlalchemy
 toolz==0.9.0              # via dask
 torch==0.4.1
 traitlets==4.3.2          # via ipython

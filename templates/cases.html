@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  {% for case in results %}
+    <div class="case-pixel"
+         data-date="{{ case.date }}"
+         data-context="{{ case.context }}"
+         style="background-color: #{{ case.hex }}">
+    </div>
+  {% endfor %}
+
+{% endblock %}

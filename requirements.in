@@ -6,3 +6,9 @@ flask
 gunicorn
 
 -e git+git://github.com/anastasia/namecolor.git@ca31a23#egg=namecolor
+
+
+# db
+psycopg2
+Flask-SQLAlchemy
+sFlask-Migrate
