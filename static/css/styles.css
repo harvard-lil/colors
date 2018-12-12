@@ -1,0 +1,44 @@
+.pixel-container {
+    margin-bottom: 40px;
+}
+.case-pixel {
+    position: relative;
+    bottom: -15px;
+    float: left;
+    height: 10px;
+    width: 100%;
+}
+
+.case-info {
+    position: fixed;
+    z-index: 999;
+    right: 0;
+    background: #222;
+    color: #fff;
+    width: 350px;
+    padding: 20px;
+}
+
+.case-year {
+    color: #fff65b;
+}
+
+.case-info > .case-title {
+    font-size: 30px;
+}
+
+#load-more {
+    z-index: 99999;
+    cursor: pointer;
+    position: relative;
+    background-color: #fff;
+    color: #222;
+    border: 3px solid #222;
+    padding: 10px 20px;
+    right: 0;
+}
+
+#load-more[disabled=""] {
+    background-color: #555;
+    cursor: default;
+}

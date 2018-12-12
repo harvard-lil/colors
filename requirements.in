@@ -11,4 +11,11 @@ gunicorn
 # db
 psycopg2
 Flask-SQLAlchemy
-sFlask-Migrate
+Flask-Migrate
+
+# data parsing
+pandas
+
+jupyter
+notebook>=5.7.2
+

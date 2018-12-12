@@ -9,7 +9,7 @@ from color.trained import get_color
 from app import db as database, Color
 from config import settings
 
-color_results_file = os.path.join(settings.DATA_DIR, "color_results_copy.txt")
+color_results_file = os.path.join(settings.DATA_DIR, "color_results.txt")
 
 
 def get_color_words_in_captured_text(text):
@@ -48,6 +48,7 @@ def populate_db():
             color.date = parse_date(res["date"])
             session.add(color)
             session.commit()
+            print("added color", color.id)
         except Exception as e:
             print("caught error")
             pass
@@ -61,30 +62,35 @@ def lum(r, g, b):
 
 def populate_colors_in_db():
     session = database.create_scoped_session()
-    colors = Color.query.all()
+    colors = session.query(Color)
     for color in colors:
-        color_obj = get_color(color.captured_text)
+        if color.hex:
+            continue
+        else:
+            color_obj = get_color(color.captured_text)
 
-        original_rgb_vals = [float(item) for item in color_obj["rgb"]]
+            original_rgb_vals = [float(item) for item in color_obj["rgb"]]
 
-        color.rgb = [int(item) for item in original_rgb_vals]
-        color.lab = [float(item) for item in color_obj["lab"]]
-        color.hex = color_obj["hex"][1:]
-        color.lum = lum(*original_rgb_vals)
-        color.hsv = list(colorsys.rgb_to_hsv(*color.rgb))
-        session.merge(color)
-        session.flush()
-        session.commit()
-        print("added", color.id)
+            color.rgb = [int(item) for item in original_rgb_vals]
+            color.lab = [float(item) for item in color_obj["lab"]]
+            print("color lab",  color.lab)
+            color.hex = color_obj["hex"][1:]
+            color.lum = lum(*original_rgb_vals)
+            color.hsv = list(colorsys.rgb_to_hsv(*color.rgb))
+            session.merge(color)
+            session.flush()
+            session.commit()
+            print("added", color.id)
+
 
 # TODO!
 def remove_names_in_db():
     session = database.create_scoped_session()
-    colors = Color.query.all()
+    colors = session.query(Color)
     for color in colors:
         words = color.captured_text.split(' ')
         if '-' in color.captured_text:
             pass
         elif len(words) == 1 and color.captured_text[0] == color.captured_text[0].upper():
             session.delete(color)
-            session.commit()
+    session.commit()

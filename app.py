@@ -75,13 +75,32 @@ def show_lum():
 
         return render_template("cases.html", results=colors[0:5000])
 
+@app.route("/filter", methods=['GET'])
+def show_word():
+    word = request.args.get('word', None)
+    page = request.args.get('page', None)
+    # db.create_scoped_session()
+    filter_by = Color.captured_text.contains(word) if word else None
+    if page:
+        colors_to_send = request_incremental('date', page=page, filter_by=filter_by)
+        return jsonify(colors_to_send)
+    else:
+        if word:
+            colors = Color.query.order_by("date").filter(filter_by).limit(5000).all()
+        else:
+            colors = Color.query.order_by("date").limit(5000).all()
+        return render_template("cases.html", results=colors)
 
-def request_incremental(order="lum", page=0):
+
+def request_incremental(order="lum", page=0, filter_by=None):
     starting_num = 5000
-    increment = 1000
+    increment = 2000
     from_data = starting_num + (int(page) * increment)
     to_data = from_data + increment
-    colors = Color.query.order_by(order).all()[from_data:to_data]
+    if filter_by is not None:
+        colors = Color.query.order_by(order).filter(filter_by).all()[from_data:to_data]
+    else:
+        colors = Color.query.order_by(order).all()[from_data:to_data]
     return [color.as_dict() for color in colors]
 
 
@@ -95,7 +114,7 @@ class Color(db.Model):
     context = db.Column(db.String(2000))
     hex = db.Column(db.String(20))
     rgb = db.Column(db.ARRAY(db.Integer))
-    lab = db.Column(db.ARRAY(db.Integer))
+    lab = db.Column(db.ARRAY(db.Float))
     hsv = db.Column(db.ARRAY(db.Integer))
     lum = db.Column(db.Float)
 

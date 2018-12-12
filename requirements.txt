@@ -5,8 +5,10 @@
 #    pip-compile --output-file requirements.txt requirements.in
 #
 -e git+git://github.com/anastasia/namecolor.git@ca31a23#egg=namecolor
+alembic==1.0.5            # via flask-migrate
 appnope==0.1.0            # via ipython
 backcall==0.1.0           # via ipython
+bleach==3.0.2             # via nbconvert
 certifi==2018.11.29       # via requests
 chardet==3.0.4            # via requests
 click==7.0                # via flask, pip-tools
@@ -15,41 +17,69 @@ colormath==3.0.0
 cycler==0.10.0            # via matplotlib
 dask[array]==1.0.0        # via scikit-image
 decorator==4.3.0          # via ipython, networkx, traitlets
+defusedxml==0.5.0         # via nbconvert
+entrypoints==0.2.3        # via nbconvert
+flask-migrate==2.3.1
 flask-sqlalchemy==2.3.2
 flask==1.0.2
 gunicorn==19.9.0
 idna==2.7                 # via requests
-ipython-genutils==0.2.0   # via traitlets
+ipykernel==5.1.0          # via ipywidgets, jupyter, jupyter-console, notebook, qtconsole
+ipython-genutils==0.2.0   # via nbformat, notebook, qtconsole, traitlets
 ipython==7.1.1
+ipywidgets==7.4.2         # via jupyter
 itsdangerous==1.1.0       # via flask
 jedi==0.13.1              # via ipython
-jinja2==2.10              # via flask
+jinja2==2.10              # via flask, nbconvert, notebook
+jsonschema==2.6.0         # via nbformat
+jupyter-client==5.2.3     # via ipykernel, jupyter-console, notebook, qtconsole
+jupyter-console==6.0.0    # via jupyter
+jupyter-core==4.4.0       # via jupyter-client, nbconvert, nbformat, notebook, qtconsole
+jupyter==1.0.0
 kiwisolver==1.0.1         # via matplotlib
-markupsafe==1.1.0         # via jinja2
+mako==1.0.7               # via alembic
+markupsafe==1.1.0         # via jinja2, mako
 matplotlib==3.0.2         # via scikit-image
+mistune==0.8.4            # via nbconvert
+nbconvert==5.4.0          # via jupyter, notebook
+nbformat==4.4.0           # via ipywidgets, nbconvert, notebook
 networkx==2.2             # via colormath, scikit-image
-numpy==1.15.4             # via colormath, dask, matplotlib, pywavelets, scipy
+notebook==5.7.2
+numpy==1.15.4             # via colormath, dask, matplotlib, pandas, pywavelets, scipy
+pandas==0.23.4
+pandocfilters==1.4.2      # via nbconvert
 parso==0.3.1              # via jedi
 pexpect==4.6.0            # via ipython
 pickleshare==0.7.5        # via ipython
 pillow==5.3.0             # via scikit-image
 pip-tools==3.1.0
-prompt-toolkit==2.0.7     # via ipython
+prometheus-client==0.4.2  # via notebook
+prompt-toolkit==2.0.7     # via ipython, jupyter-console
 psycopg2==2.7.6.1
-ptyprocess==0.6.0         # via pexpect
-pygments==2.3.0           # via ipython
+ptyprocess==0.6.0         # via pexpect, terminado
+pygments==2.3.0           # via ipython, jupyter-console, nbconvert, qtconsole
 pyparsing==2.3.0          # via matplotlib
 python-colourlovers==0.1.1
-python-dateutil==2.7.5    # via matplotlib
+python-dateutil==2.7.5    # via alembic, jupyter-client, matplotlib, pandas
+python-editor==1.0.3      # via alembic
+pytz==2018.7              # via pandas
 pywavelets==1.0.1         # via scikit-image
+pyzmq==17.1.2             # via jupyter-client, notebook
+qtconsole==4.4.3          # via jupyter
 requests==2.20.1          # via python-colourlovers
 scikit-image==0.14.1
 scipy==1.1.0              # via scikit-image
-six==1.11.0               # via cycler, pip-tools, prompt-toolkit, python-dateutil, scikit-image, traitlets
-sqlalchemy==1.2.14        # via flask-sqlalchemy
+send2trash==1.5.0         # via notebook
+six==1.11.0               # via bleach, cycler, pip-tools, prompt-toolkit, python-dateutil, scikit-image, traitlets
+sqlalchemy==1.2.14        # via alembic, flask-sqlalchemy
+terminado==0.8.1          # via notebook
+testpath==0.4.2           # via nbconvert
 toolz==0.9.0              # via dask
 torch==0.4.1
-traitlets==4.3.2          # via ipython
+tornado==5.1.1            # via ipykernel, jupyter-client, notebook, terminado
+traitlets==4.3.2          # via ipykernel, ipython, ipywidgets, jupyter-client, jupyter-core, nbconvert, nbformat, notebook, qtconsole
 urllib3==1.24.1           # via requests
 wcwidth==0.1.7            # via prompt-toolkit
+webencodings==0.5.1       # via bleach
 werkzeug==0.14.1          # via flask
+widgetsnbextension==3.4.2  # via ipywidgets

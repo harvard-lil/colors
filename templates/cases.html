@@ -1,21 +1,24 @@
 {% extends "layout.html" %}
 {% block content %}
-
-  {% for case in results %}
-    <div class="case-pixel tooltip"
-         data-date="{{ case.date }}"
-         data-context="{{ case.context }}"
-         style="background-color: #{{ case.hex }}">
-    <span class="tooltiptext">
-      <h2>{{ case.captured_text }}</h2>
-      <em>"{{ case.context }} "</em>
-      <br/>
-      {{ case.date }}
-      <br/>
-      {{ case.name_abbreviation }}
-     </span>
-    </div>
-
-  {% endfor %}
+  <div id="pixel-container">
+    {% for case in results %}
+      <a href="https://api.case.law/v1/cases/{{ case.case_id }}"
+         target="_blank">
+        <div class="case-pixel"
+             data-date="{{ case.date }}"
+             data-context="{{ case.context }}"
+             data-text="{{ case.captured_text }}"
+             data-title="{{ case.name_abbreviation }}"
+             style="background-color: #{{ case.hex }}"></div>
+      </a>
+    {% endfor %}
+  </div>
+  <div class="case-info">
+    <h1 class="case-year"></h1>
+    <h2 class="case-title"></h2>
+    <p class="case-text"></p>
+  </div>
+  <div class="year"></div>
+  <button id="load-more">Load more...</button>
 
 {% endblock %}
