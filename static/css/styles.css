@@ -1,3 +1,30 @@
+nav {
+    padding: 20px;
+    background-color: #222;
+}
+nav > ul {
+    display: inline-block;
+}
+nav > ul > li {
+    list-style: none;
+    float: left;
+    margin-right: 20px;
+}
+
+nav > ul > li > a {
+    color: white;
+    text-decoration: none;
+}
+
+nav > ul > li > a:hover, a:active, a:focus {
+    color: #fff65b;
+    border-bottom: 3px solid #fff65b;
+}
+
+.container {
+    padding: 0;
+}
+
 .pixel-container {
     margin-bottom: 40px;
 }
@@ -7,12 +34,14 @@
     float: left;
     height: 10px;
     width: 100%;
+    top: 0;
 }
 
 .case-info {
     position: fixed;
     z-index: 999;
     right: 0;
+    top: 0;
     background: #222;
     color: #fff;
     width: 350px;
@@ -44,10 +73,16 @@
     cursor: default;
 }
 
+.create-container {
+    margin: 0 auto;
+    padding: 20px;
+    width: 80%;
+}
 
 #color {
     width: 100%;
     padding: 20px;
     border: 1px solid black;
-    margin-top: 20%;
+    margin: 0 auto;
+    position: relative;
 }
