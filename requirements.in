@@ -7,6 +7,8 @@ gunicorn
 
 -e git+git://github.com/anastasia/namecolor.git@ca31a23#egg=namecolor
 
+# tasks
+fabric3
 
 # db
 psycopg2

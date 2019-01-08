@@ -7,23 +7,28 @@
 -e git+git://github.com/anastasia/namecolor.git@ca31a23#egg=namecolor
 alembic==1.0.5            # via flask-migrate
 appnope==0.1.0            # via ipython
+asn1crypto==0.24.0        # via cryptography
 backcall==0.1.0           # via ipython
+bcrypt==3.1.5             # via paramiko
 bleach==3.0.2             # via nbconvert
 certifi==2018.11.29       # via requests
+cffi==1.11.5              # via bcrypt, cryptography, pynacl
 chardet==3.0.4            # via requests
 click==7.0                # via flask, pip-tools
 cloudpickle==0.6.1        # via scikit-image
 colormath==3.0.0
+cryptography==2.4.2       # via paramiko
 cycler==0.10.0            # via matplotlib
 dask[array]==1.0.0        # via scikit-image
 decorator==4.3.0          # via ipython, networkx, traitlets
 defusedxml==0.5.0         # via nbconvert
 entrypoints==0.2.3        # via nbconvert
+fabric3==1.14.post1
 flask-migrate==2.3.1
 flask-sqlalchemy==2.3.2
 flask==1.0.2
 gunicorn==19.9.0
-idna==2.7                 # via requests
+idna==2.7                 # via cryptography, requests
 ipykernel==5.1.0          # via ipywidgets, jupyter, jupyter-console, notebook, qtconsole
 ipython-genutils==0.2.0   # via nbformat, notebook, qtconsole, traitlets
 ipython==7.1.1
@@ -48,6 +53,7 @@ notebook==5.7.2
 numpy==1.15.4             # via colormath, dask, matplotlib, pandas, pywavelets, scipy
 pandas==0.23.4
 pandocfilters==1.4.2      # via nbconvert
+paramiko==2.4.2           # via fabric3
 parso==0.3.1              # via jedi
 pexpect==4.6.0            # via ipython
 pickleshare==0.7.5        # via ipython
@@ -57,7 +63,10 @@ prometheus-client==0.4.2  # via notebook
 prompt-toolkit==2.0.7     # via ipython, jupyter-console
 psycopg2==2.7.6.1
 ptyprocess==0.6.0         # via pexpect, terminado
+pyasn1==0.4.5             # via paramiko
+pycparser==2.19           # via cffi
 pygments==2.3.0           # via ipython, jupyter-console, nbconvert, qtconsole
+pynacl==1.3.0             # via paramiko
 pyparsing==2.3.0          # via matplotlib
 python-colourlovers==0.1.1
 python-dateutil==2.7.5    # via alembic, jupyter-client, matplotlib, pandas
@@ -70,7 +79,7 @@ requests==2.20.1          # via python-colourlovers
 scikit-image==0.14.1
 scipy==1.1.0              # via scikit-image
 send2trash==1.5.0         # via notebook
-six==1.11.0               # via bleach, cycler, pip-tools, prompt-toolkit, python-dateutil, scikit-image, traitlets
+six==1.11.0               # via bcrypt, bleach, cryptography, cycler, fabric3, pip-tools, prompt-toolkit, pynacl, python-dateutil, scikit-image, traitlets
 sqlalchemy==1.2.14        # via alembic, flask-sqlalchemy
 terminado==0.8.1          # via notebook
 testpath==0.4.2           # via nbconvert
