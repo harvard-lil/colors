@@ -1,5 +1,4 @@
 import os
-import json
 
 from flask import Flask
 from flask_migrate import Migrate
@@ -19,21 +18,16 @@ migrate = Migrate(app, db)
 color_computed_file = os.path.join(settings.DATA_DIR, "computed_color_results.json")
 
 
-# FLASK_APP=web/app.py FLASK_DEBUG=1 python -m flask run
-
-
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/", methods=['GET'])
 def home():
-    if request.method == 'GET':
-        return render_template("main.html")
-    elif request.method == 'POST':
-        color_string = request.form.get('color', None)
-
-        if not color_string:
-            return render_template("main.html")
-
-        hex_color = get_color(color_string)['hex']
-        return render_template("main.html", color_string=color_string, color=hex_color)
+    page = request.args.get("page", None)
+    if page:
+        colors_to_send = request_incremental(order="id", page=page)
+        return jsonify(colors_to_send)
+    else:
+        # db.create_scoped_session()
+        colors = Color.query.order_by("id").limit(5000).all()
+        return render_template("cases.html", results=colors)
 
 
 @app.route("/color", methods=['GET'])
@@ -51,16 +45,19 @@ def color():
                     "value": color_string})
 
 
-@app.route("/date", methods=["GET"])
-def show_date():
-    page = request.args.get("page", None)
-    if page:
-        colors_to_send = request_incremental(order="id", page=page)
-        return jsonify(colors_to_send)
-    else:
-        # db.create_scoped_session()
-        colors = Color.query.order_by("id").limit(5000).all()
-        return render_template("cases.html", results=colors)
+@app.route("/create", methods=["GET", "POST"])
+def create():
+    if request.method == 'GET':
+        return render_template("main.html")
+    elif request.method == 'POST':
+        print("getting data?", request.data)
+        color_string = request.form.get('color', None)
+
+        if not color_string:
+            return render_template("main.html")
+
+        hex_color = get_color(color_string)['hex']
+        return jsonify(color_string=color_string, color=hex_color)
 
 
 @app.route("/lum", methods=["GET"])
@@ -75,11 +72,11 @@ def show_lum():
 
         return render_template("cases.html", results=colors[0:5000])
 
+
 @app.route("/filter", methods=['GET'])
 def show_word():
     word = request.args.get('word', None)
     page = request.args.get('page', None)
-    # db.create_scoped_session()
     filter_by = Color.captured_text.contains(word) if word else None
     if page:
         colors_to_send = request_incremental('date', page=page, filter_by=filter_by)

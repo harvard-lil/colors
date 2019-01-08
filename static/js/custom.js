@@ -10,18 +10,20 @@ function createCasePixel(case_obj) {
   pixel.style = "background-color: #" + case_obj.hex;
   return pixel
 }
+
 function createNewRequestPath(key, val) {
   // preserve all params
-  let allParams = window.location.search.split("?")[1].split("&");
   let newParams = "?";
-  console.log("all old params", allParams);
-  for (idx in allParams) {
-    if (allParams[idx].indexOf(key+"=") < 0) {
-      newParams += allParams[idx] + "&"
+  let allParams = [];
+  if (window.location.search.length > 0) {
+    allParams = window.location.search.split("?")[1].split("&");
+    for (idx in allParams) {
+      if (allParams[idx].indexOf(key + "=") < 0) {
+        newParams += allParams[idx] + "&"
+      }
     }
   }
   newParams += key + "=" + val;
-  console.log("new url:", window.location.pathname + newParams)
   return window.location.pathname + newParams;
 }
 
@@ -74,28 +76,43 @@ function throttle(callback, limit) {
 }
 
 function addCaseContext() {
-
   $('.case-pixel').off()
       .hover(function (e) {
         let title = $(this).attr('data-title');
         let text = $(this).attr('data-text');
-        let year = $(this).attr('data-date').substring(0,4);
+        let year = $(this).attr('data-date').substring(0, 4);
         $('.case-title').text(title);
         $('.case-text').text(text);
         $('.case-year').text(year);
       });
 }
 
+function colorChange() {
+  console.log("changing color!")
+  let colorInput = $("#color");
+  let color = colorInput.val();
+  let body = $('body');
+  if (color.length > 0) {
+    $.post("/create", {"color": color})
+        .done(function(data){
+          console.log("success!", data);
+          body.css('backgroundColor', data.color)
+        })
+  }
+}
 
 $(function () {
   loadMore = document.getElementById("load-more");
-  loadMore.addEventListener('click', function (e) {
-    requestNew();
-    e.stopPropagation();
-  });
-
-  addCaseContext();
-  window.dothis = function () {
-    addCaseContext();
+  if (loadMore) {
+    loadMore.addEventListener('click', function (e) {
+      requestNew();
+      e.stopPropagation();
+    });
   }
+
+  let colorInput = document.getElementById("color");
+  if (colorInput) {
+    colorInput.addEventListener("keypress", colorChange);
+  }
+  addCaseContext();
 });
