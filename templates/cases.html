@@ -2,7 +2,7 @@
 {% block content %}
   <div id="pixel-container">
     {% for case in results %}
-      <a href="https://api.case.law/v1/cases/{{ case.case_id }}"
+      <a href="https://api.case.law/v1/cases/{{ case.case_id }}?full_case=true&format=html"
          target="_blank">
         <div class="case-pixel"
              data-date="{{ case.date }}"
