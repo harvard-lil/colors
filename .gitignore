@@ -2,3 +2,5 @@
 *.pyc
 
 data/
+
+settings.py
