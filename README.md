@@ -1,7 +1,9 @@
 ```
 $ pip install -r requirements.txt
 $ createdb colors
-``` 
+$ cp config/settings.example.py config/settings.py
+```
+and edit appropriately.
 
 Populate the db
 ```python

@@ -1,1 +1,0 @@
-from config.settings_base import *
