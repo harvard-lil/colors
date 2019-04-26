@@ -13,6 +13,4 @@ COLOR_LIST = ["amber", "amethyst", "apricot", "aqua", "aquamarine", "auburn", "a
               "tan", "tangerine", "taupe", "teal", "terracotta", "thistle", "tint", "tomato", "topaz", "turquoise",
               "ultramarine", "umber", "vermilion", "violet", "viridian", "wheat", "white", "wisteria", "yellow"]
 
-SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/colors'
-
 SQLALCHEMY_TRACK_MODIFICATIONS = False
