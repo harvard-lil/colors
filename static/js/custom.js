@@ -7,6 +7,8 @@ function createCasePixel(case_obj) {
   pixel.className = "case-pixel";
   pixel.dataset.date = case_obj.date;
   pixel.dataset.context = case_obj.context;
+  pixel.dataset.title = case_obj.title;
+  pixel.dataset.text = case_obj.text;
   pixel.style = "background-color: #" + case_obj.hex;
   return pixel
 }
@@ -42,22 +44,16 @@ function requestNew() {
           let newCasePixel = createCasePixel(data[i]);
           c.appendChild(newCasePixel);
         }
-        //TODO: hover event doesn't seem to be included here
         let el = document.getElementById('pixel-container');
         el.appendChild(c);
-
         page += 1;
         loadMore.disabled = false;
-        return data;
-
+        addCaseContext();
       },
       error: function (err) {
         console.log("error!", arguments);
         return err;
       },
-      finally: function () {
-        addCaseContext();
-      }
     })
   }
 }
@@ -81,21 +77,21 @@ function addCaseContext() {
         let title = $(this).attr('data-title');
         let text = $(this).attr('data-text');
         let year = $(this).attr('data-date').substring(0, 4);
+        let context = $(this).attr('data-context');
         $('.case-title').text(title);
         $('.case-text').text(text);
         $('.case-year').text(year);
+        $('.case-context').text("\"" + context + "\"");
       });
 }
 
 function colorChange() {
-  console.log("changing color!")
   let colorInput = $("#color");
   let color = colorInput.val();
   let body = $('body');
   if (color.length > 0) {
     $.post("/create", {"color": color})
-        .done(function(data){
-          console.log("success!", data);
+        .done(function (data) {
           body.css('backgroundColor', data.color)
         })
   }

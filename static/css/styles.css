@@ -1,3 +1,6 @@
+body {
+    font-family: sans-serif;
+}
 nav {
     padding: 20px;
     background-color: #222;
@@ -19,6 +22,14 @@ nav > ul > li > a {
 nav > ul > li > a:hover, a:active, a:focus {
     color: #fff65b;
     border-bottom: 3px solid #fff65b;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    text-decoration: none;
 }
 
 .container {
@@ -55,6 +66,14 @@ nav > ul > li > a:hover, a:active, a:focus {
 .case-info > .case-title {
     font-size: 30px;
 }
+
+.case-context {
+    border-top: 1px solid white;
+    padding-top: 10px;
+    font-size: 80%;
+    font-style: italic;
+}
+
 
 #load-more {
     z-index: 99999;

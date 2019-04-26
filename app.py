@@ -1,5 +1,7 @@
 import os
 
+from datetime import datetime
+
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
@@ -98,7 +100,17 @@ def request_incremental(order="lum", page=0, filter_by=None):
         colors = Color.query.order_by(order).filter(filter_by).all()[from_data:to_data]
     else:
         colors = Color.query.order_by(order).all()[from_data:to_data]
-    return [color.as_dict() for color in colors]
+
+    return [format_color(color) for color in colors]
+
+
+def format_color(color_obj):
+    formatted = dict(context=color_obj.context,
+                     text=color_obj.captured_text,
+                     title=color_obj.name_abbreviation,
+                     hex=color_obj.hex)
+    formatted["date"] = datetime.strftime(color_obj.date, "%Y-%m-%d")
+    return formatted
 
 
 class Color(db.Model):
