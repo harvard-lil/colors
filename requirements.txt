@@ -90,5 +90,5 @@ traitlets==4.3.2          # via ipykernel, ipython, ipywidgets, jupyter-client, 
 urllib3==1.24.2
 wcwidth==0.1.7            # via prompt-toolkit
 webencodings==0.5.1       # via bleach
-werkzeug==0.14.1          # via flask
+werkzeug==0.15.5
 widgetsnbextension==3.4.2  # via ipywidgets
