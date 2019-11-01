@@ -1,4 +1,4 @@
-pip-tools
+pip-tools==4.2.0
 
 ipython
 
@@ -29,3 +29,5 @@ notebook>=5.7.8
 
 
 werkzeug>=0.15.3
+
+Pillow==6.2.1
