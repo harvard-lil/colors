@@ -10,6 +10,7 @@ Populate the db
 from scripts import db
 db.init_db()
 db.populate_db()
+db.populate_colors_in_db()
 ```
 
 To run app locally:
