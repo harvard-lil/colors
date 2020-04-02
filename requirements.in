@@ -30,4 +30,4 @@ notebook>=5.7.8
 
 werkzeug>=0.15.3
 
-Pillow==6.2.1
+Pillow>=6.2.2
