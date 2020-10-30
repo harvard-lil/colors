@@ -9,6 +9,7 @@ gunicorn
 
 # tasks
 fabric3
+cryptography>=3.2  # required by fabric3 via paramiko
 
 # db
 psycopg2
