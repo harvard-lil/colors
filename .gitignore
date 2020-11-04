@@ -1,6 +1,9 @@
 .idea/*
 *.pyc
 
+env/
+.venv/
+
 data/
 
 settings.py
