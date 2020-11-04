@@ -1,0 +1,29 @@
+version: '3'
+services:
+  db:
+    image: registry.lil.tools/library/postgres:9.6.16
+    volumes:
+      - db_data:/var/lib/postgresql/data:delegated
+    ports:
+      - "127.0.0.1:54320:5432"
+    environment:
+      POSTGRES_PASSWORD: example
+
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    image: colors:0.01
+    tty: true
+    command: bash
+    environment:
+      - DOCKERIZED=true
+    volumes:
+      - .:/app:delegated
+    ports:
+      - "127.0.0.1:5000:5000"
+    depends_on:
+      - db
+
+volumes:
+  db_data:
