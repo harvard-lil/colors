@@ -13,7 +13,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile
-    image: colors:0.01
+    image: colors:0.02
     tty: true
     command: bash
     environment:
