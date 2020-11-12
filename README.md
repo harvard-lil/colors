@@ -43,10 +43,6 @@ bash ./docker/init.sh
 docker-compose exec web fab run
 ```
 
-In both cases, the step of `db.populate_colors_in_db()` is fairly
-time-consuming.
-
-Note that `pip-compile` can't handle the version of `torch` we need
-here, so both the local instructions and the Docker init script
-include a manual upgrade. This should be fixed, and this note removed,
-in a future release.
+In both cases, the step of `db.populate_colors_in_db()` is
+time-consuming, presently about thirteen minutes on a 3.1 GHz
+quad-core Intel Core i7.

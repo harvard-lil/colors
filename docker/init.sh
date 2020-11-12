@@ -2,15 +2,13 @@
 
 docker-compose up -d
 
+# make sure the database server is ready
 sleep 5
 
 docker-compose exec db createdb colors --user postgres
 
-# this is a bad workaround for inability to specify this version
-# in requirements.in
-docker-compose exec web pip install torch==0.4.1.post2
-
-# the last step here takes quite a lot of time
+# the last step here takes about thirteen minutes on
+# a 3.1 GHz quad-core Intel Core i7
 docker-compose exec web python -c "\
 from scripts import db ;\
 db.init_db() ;\
