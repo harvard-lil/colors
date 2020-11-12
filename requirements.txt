@@ -6,7 +6,6 @@
 #
 -e git+git://github.com/anastasia/namecolor.git@aa2a8d7#egg=namecolor
 alembic==1.0.5            # via flask-migrate
-appnope==0.1.0            # via ipython
 backcall==0.1.0           # via ipython
 bcrypt==3.1.5             # via paramiko
 bleach==3.1.4             # via nbconvert
@@ -85,6 +84,7 @@ testpath==0.4.2           # via nbconvert
 toolz==0.9.0              # via dask
 torch==0.4.1
 tornado==5.1.1            # via ipykernel, jupyter-client, notebook, terminado
+tqdm==4.51.0
 traitlets==4.3.2          # via ipykernel, ipython, ipywidgets, jupyter-client, jupyter-core, nbconvert, nbformat, notebook, qtconsole
 urllib3==1.24.2
 wcwidth==0.1.7            # via prompt-toolkit
