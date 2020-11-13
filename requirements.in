@@ -7,6 +7,7 @@ gunicorn
 
 -e git+git://github.com/anastasia/namecolor.git@aa2a8d7#egg=namecolor
 numpy==1.15.0       # required by namecolor, sensitive to version
+torch==0.4.1.post2  # required by namecolor, sensitive to version
 
 # tasks
 fabric3
