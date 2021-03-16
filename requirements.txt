@@ -61,7 +61,7 @@ pillow==7.1.0
 pip-tools==4.2.0
 prometheus-client==0.4.2  # via notebook
 prompt-toolkit==2.0.7     # via ipython, jupyter-console
-psycopg2==2.7.6.1
+psycopg2==2.8.6
 ptyprocess==0.6.0         # via pexpect, terminado
 pyasn1==0.4.5             # via paramiko
 pycparser==2.19           # via cffi
@@ -95,4 +95,4 @@ werkzeug==0.15.5
 widgetsnbextension==3.4.2  # via ipywidgets
 
 # The following packages are considered to be unsafe in a requirements file:
-# setuptools==53.0.0        # via ipython, kiwisolver
+# setuptools==54.1.2        # via ipython, kiwisolver
