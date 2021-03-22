@@ -34,7 +34,7 @@ ipython==7.1.1
 ipywidgets==7.4.2         # via jupyter
 itsdangerous==1.1.0       # via flask
 jedi==0.13.1              # via ipython
-jinja2==2.10.1
+jinja2==2.11.3
 jsonschema==2.6.0         # via nbformat
 jupyter-client==6.1.7     # via ipykernel, jupyter-console, notebook, qtconsole
 jupyter-console==6.0.0    # via jupyter
@@ -95,4 +95,4 @@ werkzeug==0.15.5
 widgetsnbextension==3.4.2  # via ipywidgets
 
 # The following packages are considered to be unsafe in a requirements file:
-# setuptools==54.1.2        # via ipython, kiwisolver
+# setuptools==54.2.0        # via ipython, kiwisolver
