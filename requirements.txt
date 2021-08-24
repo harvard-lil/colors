@@ -145,7 +145,7 @@ networkx==2.2
     # via
     #   colormath
     #   scikit-image
-notebook==6.1.5
+notebook==6.4.3
     # via
     #   -r requirements.in
     #   jupyter
@@ -266,7 +266,7 @@ torch==0.4.1.post2
     # via
     #   -r requirements.in
     #   namecolor
-tornado==5.1.1
+tornado==6.1
     # via
     #   ipykernel
     #   jupyter-client
